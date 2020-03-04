@@ -12,8 +12,8 @@ class Room(models.Model):
     s_to = models.IntegerField(default=0)
     e_to = models.IntegerField(default=0)
     w_to = models.IntegerField(default=0)
-    l_to = models.IntegerField(default=0)
-    t_to = models.IntegerField(default=0)
+    x = models.IntegerField(default=0)
+    y = models.IntegerField(default=0)
     tile_num = models.IntegerField(default=0)
     planet = models.CharField(max_length=32, default='DEFAULT PLANET')
     def connectRooms(self, destinationRoom, direction):
