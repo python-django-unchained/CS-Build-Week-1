@@ -72,7 +72,9 @@ def say(request):
 
 @api_view(['GET'])
 def rooms(request):
-    data = list(Room.objects.values())
+    query = request.GET.get('planet')
+    
+    data = list(Room.objects.filter(planet=query).values())
 
     return JsonResponse(data, safe=False)  
     
