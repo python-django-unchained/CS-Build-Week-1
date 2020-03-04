@@ -74,7 +74,6 @@ def say(request):
 def rooms(request):
     data = list(Room.objects.values())
 
-    print('hello', JsonResponse(data, safe=False))
     return JsonResponse(data, safe=False)  
     
 
