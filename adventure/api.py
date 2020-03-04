@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from .models import *
 from rest_framework.decorators import api_view
 import json
+from django.core import serializers
 
 # instantiate pusher
 # pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_KEY'), secret=config('PUSHER_SECRET'), cluster=config('PUSHER_CLUSTER'))
@@ -64,3 +65,8 @@ def move(request):
 def say(request):
     # IMPLEMENT
     return JsonResponse({'error':"Not yet implemented"}, safe=True, status=500)
+
+@api_view(["GET"])
+def rooms(request):
+    data = list(Room.objects.values())
+    return JsonResponse(data, safe=False)
