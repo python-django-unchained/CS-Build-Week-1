@@ -31,10 +31,6 @@ class Room(models.Model):
                 self.e_to = destinationRoomID
             elif direction == "w":
                 self.w_to = destinationRoomID
-            elif direction == 'l':
-                self.l_to = destinationRoomID
-            elif direction == 't':
-                self.t_to = destinationRoomID
             else:
                 print("Invalid direction")
                 return
@@ -51,6 +47,7 @@ class Player(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     x = models.IntegerField(default=0)
     y = models.IntegerField(default=0)
+    current_location = models.CharField(default='Space')
     def initialize(self):
         if self.currentRoom == 0:
             self.currentRoom = Room.objects.first().id
