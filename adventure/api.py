@@ -75,7 +75,7 @@ def say(request):
 def rooms(request):
     query = request.GET.get('planet')
     
-    data = list(Room.objects.filter(planet=query).values())
+    data = list(Room.objects.filter(planet=query).order_by('id').values())
 
     return JsonResponse(data, safe=False)  
     
