@@ -47,7 +47,7 @@ class Player(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     x = models.IntegerField(default=0)
     y = models.IntegerField(default=0)
-    current_location = models.CharField(default='Space')
+    current_location = models.CharField(max_length=64, default='Space')
     def initialize(self):
         if self.currentRoom == 0:
             self.currentRoom = Room.objects.first().id
