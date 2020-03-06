@@ -66,6 +66,35 @@ def move(request):
         players = room.playerNames(player_id)
         return JsonResponse({'name':player.user.username, 'title':room.title, 'description':room.description, 'players':players, 'error_msg':"You cannot move that way."}, safe=True)
 
+@api_view(['POST'])
+def changeplanet(request):
+    player = request.user.player
+    player_id = player.id
+    player_uuid = player.uuid
+    data = json.loads(request.body)
+    room = player.room()
+    direction = data['planet']
+
+    if direction is 'Space':
+        player.current_location = 'Space'
+        nextRoom = Room.objects.get(id=1)
+        player.currentRoom = 1
+        player.save()
+        players = nextRoom.playerNames(player_id)
+        currentPlayerUUIDs = room.playerUUIDs(player_id)
+        nextPlayerUUIDs = nextRoom.playerUUIDs(player_id)
+
+    else:
+        player.current_location = data['planet']
+        nextRoom = Room.objects.get(id=data['roomId'])
+        player.currentRoom = data['roomId']
+        player.save()
+        players = nextRoom.playerNames(player_id)
+        currentPlayerUUIDs = room.playerUUIDs(player_id)
+        nextPlayerUUIDs = nextRoom.playerUUIDs(player_id)
+        
+
+
 
 @csrf_exempt
 @api_view(["POST"])
